@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 
 // Import the custom queries module to handle database queries
-const queries = require('./querries');
+const queries = require('./querries.js');
 
 // Function to start the application
 function startApp() {

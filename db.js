@@ -11,15 +11,16 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Example query execution
-async function getAllEmployees() {
+// Function to execute a query
+async function query(sql, params) {
   try {
-    const [rows] = await pool.query('SELECT * FROM employee');
-    console.log(rows);
+    const [rows] = await pool.query(sql, params);
+    return rows;
   } catch (error) {
-    console.error('An error occurred:', error);
+    throw error;
   }
 }
 
-// Call the function to retrieve all employees
-getAllEmployees();
+module.exports = {
+  query,
+};
