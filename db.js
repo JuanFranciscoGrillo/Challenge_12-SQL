@@ -1,6 +1,7 @@
+// Import the MySQL package for database operations
 const mysql = require('mysql2/promise');
 
-// Create a pool of connections
+// Create a connection pool for managing database connections
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
@@ -11,16 +12,17 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Function to execute a query
+// Function to execute a database query
 async function query(sql, params) {
   try {
-    const [rows] = await pool.query(sql, params);
-    return rows;
+    const [rows] = await pool.execute(sql, params);
+    return rows; // Return the results of the query
   } catch (error) {
-    throw error;
+    throw error; // Throw an error if there's a problem with the query
   }
 }
 
+// Export the query function to make it accessible to other parts of the application
 module.exports = {
   query,
 };
