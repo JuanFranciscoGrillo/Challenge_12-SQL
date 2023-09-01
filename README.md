@@ -38,7 +38,7 @@ npm install
 1. Navigate to the project directory using a terminal.
 2. Run the following command to start the application:
 
-node app.js
+    node app.js
 
 3. Follow the prompts to perform actions such as viewing departments, roles, and employees, adding new data, and updating employee roles.
 
@@ -64,4 +64,6 @@ If you have any questions or need further assistance, feel free to reach out:
 - Email: jfrgm1986@gmail.com
 
 ## Demo
+
+[![Video Demo](https://img.youtube.com/vi/eVzUE9DBEXw/0.jpg)](https://www.youtube.com/watch?v=eVzUE9DBEXw)
 

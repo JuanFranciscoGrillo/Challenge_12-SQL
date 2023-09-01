@@ -1,11 +1,14 @@
+// Import inquirer for user input
 const inquirer = require('inquirer');
+
+// Import the database module
 const db = require('./db');
 
 // Function to view all departments
 async function viewAllDepartments() {
   try {
     const departments = await db.query('SELECT * FROM department');
-    console.table(departments);
+    console.table(departments); // Display departments
   } catch (error) {
     console.error('An error occurred:', error);
   }
@@ -15,7 +18,7 @@ async function viewAllDepartments() {
 async function viewAllRoles() {
   try {
     const roles = await db.query('SELECT * FROM role');
-    console.table(roles);
+    console.table(roles); // Display roles
   } catch (error) {
     console.error('An error occurred:', error);
   }
@@ -25,7 +28,7 @@ async function viewAllRoles() {
 async function viewAllEmployees() {
   try {
     const employees = await db.query('SELECT * FROM employee');
-    console.table(employees);
+    console.table(employees); // Display employees
   } catch (error) {
     console.error('An error occurred:', error);
   }
@@ -38,7 +41,7 @@ async function addDepartment() {
       {
         type: 'input',
         name: 'name',
-        message: 'Enter the name of the department:',
+        message: 'Enter the department name:',
       },
     ]);
 
@@ -57,12 +60,12 @@ async function addRole() {
       {
         type: 'input',
         name: 'title',
-        message: 'Enter the title of the role:',
+        message: 'Enter the role title:',
       },
       {
         type: 'input',
         name: 'salary',
-        message: 'Enter the salary for the role:',
+        message: 'Enter the role salary:',
       },
       {
         type: 'list',
@@ -90,28 +93,26 @@ async function addRole() {
 async function addEmployee() {
   try {
     const roles = await db.query('SELECT * FROM role');
-    const employees = await db.query('SELECT * FROM employee');
     const employee = await inquirer.prompt([
       {
         type: 'input',
         name: 'first_name',
-        message: "Enter the employee's first name:",
+        message: 'Enter the employee first name:',
       },
       {
         type: 'input',
         name: 'last_name',
-        message: "Enter the employee's last name:",
+        message: 'Enter the employee last name:',
       },
       {
         type: 'list',
         name: 'role_id',
-        message: "Select the employee's role:",
+        message: 'Select the employee role:',
         choices: roles.map((role) => ({
           name: role.title,
           value: role.id,
         })),
       },
-      // Add any additional prompts for employee details here
     ]);
 
     await db.query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?)', [
@@ -203,7 +204,7 @@ async function updateEmployeeRole() {
       {
         type: 'list',
         name: 'employee_id',
-        message: 'Select the employee you want to update:',
+        message: 'Select the employee to update:',
         choices: employees.map((employee) => ({
           name: `${employee.first_name} ${employee.last_name}`,
           value: employee.id,
